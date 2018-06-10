@@ -2,6 +2,7 @@ package com.timothy.proxy.dynamic;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 
 /**
  * Created by wangxin on 2018/6/10.
@@ -9,29 +10,18 @@ import java.lang.reflect.Method;
 public class Meipoproxy  implements InvocationHandler {
 
 
-      private   Lisi lisi;
+      private   Person targart;
 
-      public Meipoproxy (Lisi lisi){
+     public  Object getInstance(Person targart){
 
-          this.lisi=lisi;
+         this.targart=targart;
+         Class<?> clazz=targart.getClass();
+         return   Proxy.newProxyInstance(clazz.getClassLoader(),clazz.getInterfaces(),this);
 
-      }
-
-
-     public Meipoproxy getInstance(){
-
-
-          return  null;
      }
 
 
-    public  void findLove(){
 
-
-           this.lisi.findLove();
-        System.out.println();
-
-    }
 
 
     @Override
@@ -39,8 +29,10 @@ public class Meipoproxy  implements InvocationHandler {
 
         System.out.println("我是媒婆 帮你找对象  开始物色");
         System.out.println("已经找到了");
-
-
+        System.out.println("谈吧  ");
+        method.invoke(this.targart,args);
+              System.out.println("双方家里同意 ");
+        System.out.println("办事 ");
         return null;
     }
 }
