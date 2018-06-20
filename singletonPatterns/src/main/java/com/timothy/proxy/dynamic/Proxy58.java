@@ -15,9 +15,8 @@ public class Proxy58 implements InvocationHandler {
 
        this.targart=targart;
        Class<?> clazz=targart.getClass();
-
+       System.out.println(Proxy.newProxyInstance(clazz.getClassLoader(),clazz.getInterfaces(),this));
        return Proxy.newProxyInstance(clazz.getClassLoader(),clazz.getInterfaces(),this);
-
 
   }
 
